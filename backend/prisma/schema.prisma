@@ -1,0 +1,100 @@
+// Schema do banco de dados - Sistema de Gerenciamento de Chamados Técnicos
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  TECNICO
+  CLIENTE
+}
+
+enum StatusChamado {
+  ABERTO
+  EM_ANDAMENTO
+  AGUARDANDO_CLIENTE
+  RESOLVIDO
+  FECHADO
+}
+
+enum Prioridade {
+  BAIXA
+  MEDIA
+  ALTA
+  URGENTE
+}
+
+model Usuario {
+  id        String   @id @default(uuid())
+  nome      String
+  email     String   @unique
+  senhaHash String
+  role      Role     @default(CLIENTE)
+  criadoEm  DateTime @default(now())
+
+  chamadosAbertos    Chamado[]         @relation("ChamadosSolicitante")
+  chamadosAtribuidos Chamado[]         @relation("ChamadosTecnico")
+  comentarios        Comentario[]
+  historicos         HistoricoChamado[]
+
+  @@map("usuarios")
+}
+
+model Chamado {
+  id          String        @id @default(uuid())
+  titulo      String
+  descricao   String
+  categoria   String?
+  status      StatusChamado @default(ABERTO)
+  prioridade  Prioridade    @default(MEDIA)
+  criadoEm    DateTime      @default(now())
+  atualizadoEm DateTime     @updatedAt
+
+  solicitanteId String
+  solicitante   Usuario @relation("ChamadosSolicitante", fields: [solicitanteId], references: [id])
+
+  tecnicoId String?
+  tecnico   Usuario? @relation("ChamadosTecnico", fields: [tecnicoId], references: [id])
+
+  comentarios Comentario[]
+  historicos  HistoricoChamado[]
+
+  @@map("chamados")
+}
+
+model Comentario {
+  id        String   @id @default(uuid())
+  texto     String
+  criadoEm  DateTime @default(now())
+
+  chamadoId String
+  chamado   Chamado @relation(fields: [chamadoId], references: [id], onDelete: Cascade)
+
+  autorId String
+  autor   Usuario @relation(fields: [autorId], references: [id])
+
+  @@map("comentarios")
+}
+
+// Registro de auditoria: guarda cada mudança de status/prioridade/técnico do chamado
+model HistoricoChamado {
+  id          String   @id @default(uuid())
+  campo       String   // ex: "status", "prioridade", "tecnico"
+  valorAntigo String?
+  valorNovo   String
+  criadoEm    DateTime @default(now())
+
+  chamadoId String
+  chamado   Chamado @relation(fields: [chamadoId], references: [id], onDelete: Cascade)
+
+  autorId String
+  autor   Usuario @relation(fields: [autorId], references: [id])
+
+  @@map("historico_chamados")
+}

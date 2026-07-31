@@ -1,0 +1,8 @@
+      PID    PPID    PGID     WINPID   TTY         UID    STIME COMMAND
+     1241       1    1241      29508  cons2     197609 15:57:33 /usr/bin/bash
+     1093    1085    1085      28944  cons0     197609 15:21:24 /d/Node JS/node
+     1137    1094    1137       1000  cons1     197609 15:21:38 /f/Flutter/flutter/bin/flutter.bat
+     1085    1010    1085      10632  cons0     197609 15:21:23 /usr/bin/bash
+     1010       1    1010      22936  cons0     197609 15:21:01 /usr/bin/bash
+     1371    1241    1371       2996  cons2     197609 16:06:31 /usr/bin/PS
+     1094       1    1094      30012  cons1     197609 15:21:33 /usr/bin/bash
