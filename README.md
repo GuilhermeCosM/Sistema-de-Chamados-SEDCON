@@ -8,9 +8,12 @@ Construído com a stack **Node.js + Flutter**, alinhada à vaga de Desenvolvedor
 https://sistema-de-chamados-sedcon.netlify.app
 
 ## Usuários
-Cliente : cliente@chamados.com senha : 123456
-Técnico : tecnico@chamados.com senha : 123456
-Admin: admin@chamados.com senha : 123456
+Cliente : cliente@chamados.com 
+senha : 123456
+Técnico : tecnico@chamados.com 
+senha : 123456
+Admin: admin@chamados.com 
+senha : 123456
 
 ## Screenshots
 
