@@ -7,6 +7,11 @@ Construído com a stack **Node.js + Flutter**, alinhada à vaga de Desenvolvedor
 ## Acesse aqui
 https://sistema-de-chamados-sedcon.netlify.app
 
+## Usuários
+Cliente : cliente@chamados.com senha : 123456
+Técnico : tecnico@chamados.com senha : 123456
+Admin: admin@chamados.com senha : 123456
+
 ## Screenshots
 
 | Login | Lista de chamados |
