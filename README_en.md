@@ -1,18 +1,28 @@
 # SEDCON Support Ticket System (Sistema de Chamados)
-Sistema de chamados técnicos da SEDCON/PROCON-RJ: cadastro, atualização de status, definição de prioridade, atribuição de técnico e histórico de auditoria.
 
-Construído com a stack **Node.js + Flutter**, alinhada à vaga de Desenvolvedor(a) Full Stack Júnior (Node.js + Flutter).
+Technical support ticket system for SEDCON/PROCON-RJ: ticket creation, status updates, priority assignment, technician assignment, and audit history.
+
+Built with the **Node.js + Flutter** stack, aligned with the Junior Full Stack Developer position (Node.js + Flutter).
 
 ## Access here
+
 https://sistema-de-chamados-sedcon.netlify.app
+
+Users
+
+| Profile  | E-mail                | Password |
+|---------|------------------------|----------|
+| Cliente | cliente@chamados.com   | 123456   |
+| Técnico | tecnico@chamados.com   | 123456   |
+| Admin   | admin@chamados.com     | 123456   |
 
 ## Screenshots
 
-| Login | Lista de chamados |
+| Login | Ticket list |
 |---|---|
 | <img src="docs/screenshots/login.png" width="350"/> | <img src="docs/screenshots/lista.png" width="350"/> |
 
-| Detalhe do chamado (status, prioridade, comentários e histórico) | Novo chamado |
+| Ticket detail (status, priority, comments, and history) | New ticket |
 |---|---|
 | <img src="docs/screenshots/detalhe.png" width="350"/> | <img src="docs/screenshots/novo.png" width="350"/> |
 
@@ -21,7 +31,7 @@ https://sistema-de-chamados-sedcon.netlify.app
 - **Back-end**: Node.js, TypeScript, Express, Prisma ORM, PostgreSQL, JWT, Zod
 - **Mobile**: Flutter (Dart), Provider, http, flutter_secure_storage
 
-## Estrutura
+## Structure
 
 ```
 projeto-chamados/
@@ -29,36 +39,36 @@ projeto-chamados/
   flutter_app/   # App mobile (Flutter) que consome a API
 ```
 
-## Como rodar o projeto completo
+## How to run the full project
 
-1. **Backend**: siga `backend/README.md` (Docker Compose sobe o PostgreSQL, depois `npm install`, migrations e seed)
-2. **Flutter**: siga `flutter_app/README.md` (aponte a URL da API e rode `flutter run`)
+1. **Backend**: follow `backend/README.md` (Docker Compose brings up PostgreSQL, then `npm install`, migrations, and seed)
+2. **Flutter**: follow `flutter_app/README.md` (point to the API URL and run `flutter run`)
 
-## Funcionalidades principais
+## Main features
 
-- Autenticação com JWT e 3 perfis: `ADMIN`, `TECNICO`, `CLIENTE`
-- CRUD completo de chamados com filtros e paginação
-- Atualização de status (Aberto → Em andamento → Aguardando cliente → Resolvido → Fechado)
-- Definição/alteração de prioridade (Baixa, Média, Alta, Urgente)
-- Atribuição de técnico responsável
-- Comentários por chamado
-- **Histórico de auditoria**: toda mudança de status/prioridade/técnico fica registrada com autor e data
-- Documentação da API via Swagger (`/docs`)
+- Authentication with JWT and 3 roles: `ADMIN`, `TECNICO`, `CLIENTE`
+- Full ticket CRUD with filters and pagination
+- Status updates (Open → In progress → Awaiting customer → Resolved → Closed)
+- Priority definition/change (Low, Medium, High, Urgent)
+- Assignment of responsible technician
+- Comments per ticket
+- **Audit history**: every status/priority/technician change is logged with author and date
+- API documentation via Swagger (`/docs`)
 
-## Testes automatizados
+## Automated tests
 
-O backend conta com testes de integração (Jest + Supertest), cobrindo autenticação, permissões por perfil e o fluxo de chamados (criação, atualização de status/prioridade e histórico de auditoria).
+The backend includes integration tests (Jest + Supertest), covering authentication, role-based permissions, and the ticket flow (creation, status/priority updates, and audit history).
 
-Para rodar (com o banco de testes já configurado — veja `backend/README.md`):
+To run them (with the test database already configured — see `backend/README.md`):
 
 ```bash
 cd backend
 npm test
 ```
 
-## Próximos passos sugeridos (diferenciais de portfólio)
+## Suggested next steps (portfolio enhancements)
 
-- [x] Testes automatizados no backend (Jest + Supertest)
-- [ ] Notificações em tempo real (Socket.io) quando o status de um chamado muda
-- [ ] Deploy do backend (Railway/Render) + banco gerenciado, e do app via TestFlight/Play Console interno
-- [ ] Tela de dashboard com contagem de chamados por status/prioridade
+- [x] Automated backend tests (Jest + Supertest)
+- [ ] Real-time notifications (Socket.io) when a ticket's status changes
+- [ ] Backend deployment (Railway/Render) + managed database, and app deployment via TestFlight/Play Console internal track
+- [ ] Dashboard screen with ticket counts by status/priority
