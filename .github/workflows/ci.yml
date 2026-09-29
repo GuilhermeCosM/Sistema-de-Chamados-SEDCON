@@ -1,0 +1,58 @@
+name: CI - Testes do back-end
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: backend
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: usuario
+          POSTGRES_PASSWORD: senha
+          POSTGRES_DB: chamados_db_test
+        ports:
+          - 5434:5432
+        options: >-
+          --health-cmd "pg_isready -U usuario -d chamados_db_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Baixar o codigo
+        uses: actions/checkout@v4
+
+      - name: Instalar o Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Gerar o Prisma Client
+        run: npx prisma generate
+
+      - name: Preparar o banco de testes
+        run: |
+          if [ -d prisma/migrations ]; then
+            npx dotenv -e .env.test -- npx prisma migrate deploy
+          else
+            npx dotenv -e .env.test -- npx prisma db push
+          fi
+
+      - name: Rodar os testes (Jest + Supertest)
+        run: npm test
