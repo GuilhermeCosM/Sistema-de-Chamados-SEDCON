@@ -4,6 +4,7 @@ import swaggerUi from "swagger-ui-express";
 import authRoutes from "./routes/authRoutes";
 import chamadoRoutes from "./routes/chamadoRoutes";
 import usuarioRoutes from "./routes/usuarioRoutes";
+import agenteRoutes from "./routes/agenteRoutes";
 import { errorHandler } from "./middlewares/errorHandler";
 import { swaggerDocument } from "./docs/swagger";
 
@@ -19,5 +20,6 @@ app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/auth", authRoutes);
 app.use("/chamados", chamadoRoutes);
 app.use("/usuarios", usuarioRoutes);
+app.use("/agente", agenteRoutes);
 
 app.use(errorHandler);
